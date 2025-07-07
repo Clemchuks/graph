@@ -1,0 +1,184 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <style>
+      body {
+        font-family: 'Roboto', sans-serif;
+      }
+
+      .graph {
+        position: relative;
+        height: 300px;
+      }
+    </style>
+ 
+  <div class="bg-white text-center px-4 py-6">
+    <div class="max-w-md mx-auto">
+      <h1 class="text-green-700 font-bold text-xl mb-2" style="color: #3b82f6;">NEUROPATHY</h1>
+      <h2 class="text-gray-900 font-bold text-lg leading-tight mb-2">
+        The last plan you'll ever need<br />to take your life back
+      </h2>
+      <p class="text-sm text-gray-600 mb-1">
+        Based on your answers, we expect you to<br />
+        <span class="text-green-600 font-medium" style="color: #3b82f6;">completely reverse negative effects by:</span>
+      </p>
+    <p class="text-xl text-green-800 font-bold mb-4" id="dynamic-date"></p>
+
+      <div class="relative h-60 bg-white graph">
+        <!-- Chart background -->
+        <div class="absolute top-0 left-0 right-0 bottom-0">
+          <svg viewBox="0 0 300 200" class="w-full h-full">
+            <!-- Background lines -->
+            <line x1="0" y1="40" x2="300" y2="40" stroke="#eee" stroke-width="1" />
+            <line x1="0" y1="80" x2="300" y2="80" stroke="#eee" stroke-width="1" />
+            <line x1="0" y1="120" x2="300" y2="120" stroke="#eee" stroke-width="1" />
+            <line x1="0" y1="160" x2="300" y2="160" stroke="#eee" stroke-width="1" />
+
+            <!-- Data line -->
+            <defs>
+              <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#ef4444;stop-opacity:1" />
+                <stop offset="50%" style="stop-color:#facc15;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
+              </linearGradient>
+            </defs>
+            <polyline
+              id="graph-line"
+              fill="none"
+              stroke="url(#grad)"
+              stroke-width="4"
+              points="0,50 75,90 150,140 225,170 300,180"
+            />
+
+            <!-- Dots -->
+            <circle id="dot1" cx="0" cy="50" r="6" fill="#ef4444" />
+            <circle id="dot2" cx="75" cy="90" r="6" fill="#f97316" />
+            <circle id="dot3" cx="150" cy="140" r="6" fill="#facc15" />
+            <circle id="dot4" cx="225" cy="170" r="6" fill="#10b981" />
+            <circle id="dot5" cx="300" cy="180" r="6" fill="#0f766e" />
+          </svg>
+        </div>
+
+        <!-- Labels -->
+        <div
+          class="absolute top-[10px] left-[5px] bg-red-100 text-red-800 text-xs font-semibold rounded-full px-2 py-0.5 shadow"
+        >
+          Now - 46.71
+        </div>
+        <div
+          class="absolute top-[160px] right-[5px] bg-gray-200 text-gray-800 text-xs font-semibold rounded-full px-2 py-0.5 shadow"
+        >
+          Goal - 13.25
+        </div>
+        <div
+          class="absolute bottom-0 w-full flex justify-between text-xs text-gray-500 font-medium px-2"
+        >
+          <span>MAY</span>
+          <span>JUN</span>
+          <span>JUL</span>
+          <span>AUG</span>
+        </div>
+      </div>
+
+      <p class="text-[10px] text-gray-500 mt-2">
+        * Based on the data of users who log their progress in Neuropathy.
+      </p>
+
+      <div class="mt-6 text-left">
+        <h3 class="text-base font-semibold text-gray-900 mb-1">
+          Main Symptom: <span class="text-red-600">🔥 Burning or Tingling</span>
+        </h3>
+        <p class="text-sm text-gray-700 mb-2">
+          Secondary Symptoms: <span class="text-red-600">🔥 Burning</span>
+        </p>
+        <p class="text-sm text-gray-800 mb-2 font-medium">
+          Based on your symptoms, your personalized neuropathy plan will include:
+        </p>
+        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+          <li>
+            Soothing support for inflammation and nerve repair —
+            <span class="font-medium">such as magnesium and Vitamin B12</span>
+          </li>
+          <li>
+            Targeted strategies to ease your specific symptoms
+          </li>
+          <li>
+            A focus on reducing nerve inflammation and restoring sensation
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      // GSAP Animation
+      const futureDate = new Date();
+      futureDate.setDate(futureDate.getDate() + 30);
+      const options = { year: 'numeric', month: 'short', day: 'numeric' };
+      document.getElementById("dynamic-date").textContent = futureDate.toLocaleDateString('en-US', options);
+
+
+      gsap.from("#graph-line", {
+        duration: 2,
+        drawSVG: "0% 0%",
+        ease: "power1.inOut",
+      });
+
+      gsap.from("#dot1", {
+        duration: 1.5,
+        opacity: 0,
+        x: -10,
+        y: 10,
+        ease: "bounce.out",
+        delay: 0.5,
+      });
+
+      gsap.from("#dot2", {
+        duration: 1.5,
+        opacity: 0,
+        x: -10,
+        y: 10,
+        ease: "bounce.out",
+        delay: 1,
+      });
+
+      gsap.from("#dot3", {
+        duration: 1.5,
+        opacity: 0,
+        x: -10,
+        y: 10,
+        ease: "bounce.out",
+        delay: 1.5,
+      });
+
+      gsap.from("#dot4", {
+        duration: 1.5,
+        opacity: 0,
+        x: -10,
+        y: 10,
+        ease: "bounce.out",
+        delay: 2,
+      });
+
+      gsap.from("#dot5", {
+        duration: 1.5,
+        opacity: 0,
+        x: -10,
+        y: 10,
+        ease: "bounce.out",
+        delay: 2.5,
+      })
+
+    </script>
+  </body>
+</html>
