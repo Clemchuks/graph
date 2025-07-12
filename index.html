@@ -1,184 +1,109 @@
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-    <style>
-      body {
-        font-family: 'Roboto', sans-serif;
-      }
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 
-      .graph {
-        position: relative;
-        height: 300px;
-      }
-    </style>
- 
-  <div class="bg-white text-center px-4 py-6">
-    <div class="max-w-md mx-auto">
-      <h1 class="text-green-700 font-bold text-xl mb-2" style="color: #3b82f6;">NEUROPATHY</h1>
-      <h2 class="text-gray-900 font-bold text-lg leading-tight mb-2">
-        The last plan you'll ever need<br />to take your life back
-      </h2>
-      <p class="text-sm text-gray-600 mb-1">
-        Based on your answers, we expect you to<br />
-        <span class="text-green-600 font-medium" style="color: #3b82f6;">completely reverse negative effects by:</span>
-      </p>
-    <p class="text-xl text-green-800 font-bold mb-4" id="dynamic-date"></p>
+<style>
+  .graph { position: relative; height: 300px; }
+  .water-wave { animation: waveMotion 3s ease-in-out infinite; }
+  @keyframes waveMotion {
+    0%,100% { transform: translateY(0); }
+    50%     { transform: translateY(8px); }
+  }
+</style>
 
-      <div class="relative h-60 bg-white graph">
-        <!-- Chart background -->
-        <div class="absolute top-0 left-0 right-0 bottom-0">
-          <svg viewBox="0 0 300 200" class="w-full h-full">
-            <!-- Background lines -->
-            <line x1="0" y1="40" x2="300" y2="40" stroke="#eee" stroke-width="1" />
-            <line x1="0" y1="80" x2="300" y2="80" stroke="#eee" stroke-width="1" />
-            <line x1="0" y1="120" x2="300" y2="120" stroke="#eee" stroke-width="1" />
-            <line x1="0" y1="160" x2="300" y2="160" stroke="#eee" stroke-width="1" />
+<div class="bg-[#fdf6f0] text-center px-4 py-6 font-sans">
+  <div class="max-w-md mx-auto">
 
-            <!-- Data line -->
-            <defs>
-              <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" style="stop-color:#ef4444;stop-opacity:1" />
-                <stop offset="50%" style="stop-color:#facc15;stop-opacity:1" />
-                <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
-              </linearGradient>
-            </defs>
-            <polyline
-              id="graph-line"
-              fill="none"
-              stroke="url(#grad)"
-              stroke-width="4"
-              points="0,50 75,90 150,140 225,170 300,180"
-            />
+    <!-- Titles -->
+    <h1 class="font-bold text-2xl mb-2 text-[#3b82f6]">NEUROPATHY</h1>
+    <h2 class="text-lg font-bold text-gray-900 mb-4">The last plan you'll ever need to take your life back</h2>
 
-            <!-- Dots -->
-            <circle id="dot1" cx="0" cy="50" r="6" fill="#ef4444" />
-            <circle id="dot2" cx="75" cy="90" r="6" fill="#f97316" />
-            <circle id="dot3" cx="150" cy="140" r="6" fill="#facc15" />
-            <circle id="dot4" cx="225" cy="170" r="6" fill="#10b981" />
-            <circle id="dot5" cx="300" cy="180" r="6" fill="#0f766e" />
-          </svg>
-        </div>
+    <!-- Intro -->
+    <p class="text-sm text-gray-700 mb-2">
+      Based on your answers, we expect you to <span class="font-semibold text-[#3b82f6]">completely reverse negative effects by:</span>
+    </p>
+    <p class="text-xl text-green-800 font-bold mb-6" id="dynamic-date"></p>
 
-        <!-- Labels -->
-        <div
-          class="absolute top-[10px] left-[5px] bg-red-100 text-red-800 text-xs font-semibold rounded-full px-2 py-0.5 shadow"
-        >
-          Now - 46.71
-        </div>
-        <div
-          class="absolute top-[160px] right-[5px] bg-gray-200 text-gray-800 text-xs font-semibold rounded-full px-2 py-0.5 shadow"
-        >
-          Goal - 13.25
-        </div>
-        <div
-          class="absolute bottom-0 w-full flex justify-between text-xs text-gray-500 font-medium px-2"
-        >
-          <span>MAY</span>
-          <span>JUN</span>
-          <span>JUL</span>
-          <span>AUG</span>
-        </div>
-      </div>
+    <!-- Graph -->
+    <div class="relative h-72 graph">
+      <svg viewBox="0 0 400 300" class="w-full h-full" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ef4444"/>
+            <stop offset="50%" stop-color="#facc15"/>
+            <stop offset="100%" stop-color="#10b981"/>
+          </linearGradient>
+          <linearGradient id="flowGrad" x1="0%" y1="0%" x2="300%" y2="0%">
+            <stop offset="0%" stop-color="#4ade80" stop-opacity="0.6"/>
+            <stop offset="50%" stop-color="#22c55e" stop-opacity="0.45"/>
+            <stop offset="100%" stop-color="#16a34a" stop-opacity="0.3"/>
+            <animateTransform attributeName="gradientTransform" type="translate" from="0" to="-300" dur="3s" repeatCount="indefinite"/>
+          </linearGradient>
+        </defs>
 
-      <p class="text-[10px] text-gray-500 mt-2">
-        * Based on the data of users who log their progress in Neuropathy.
-      </p>
+        <!-- Grid -->
+        <line x1="0" y1="60" x2="400" y2="60" stroke="#eee"/>
+        <line x1="0" y1="120" x2="400" y2="120" stroke="#eee"/>
+        <line x1="0" y1="180" x2="400" y2="180" stroke="#eee"/>
+        <line x1="0" y1="240" x2="400" y2="240" stroke="#eee"/>
 
-      <div class="mt-6 text-left">
-        <h3 class="text-base font-semibold text-gray-900 mb-1">
-          Main Symptom: <span class="text-red-600">👇 </span>
-        </h3>
-        <p class="text-sm text-gray-700 mb-2">
-          Secondary Symptoms: <span class="text-red-600">👇</span>
-        </p>
-        <p class="text-sm text-gray-800 mb-2 font-medium">
-          Based on your symptoms, your personalized neuropathy plan will include:
-        </p>
-        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
-          <li>
-            Soothing support for inflammation and nerve repair —
-            <span class="font-medium">such as magnesium and Vitamin B12</span>
-          </li>
-          <li>
-            Targeted strategies to ease your specific symptoms
-          </li>
-          <li>
-            A focus on reducing nerve inflammation and restoring sensation
-          </li>
-        </ul>
+        <!-- Curve & Wave -->
+        <path id="graph-line" d="M0,60 C80,100 160,180 200,210 C240,240 320,260 400,280" fill="none" stroke="url(#lineGrad)" stroke-width="4"/>
+        <path class="water-wave" d="M0,300 L0,60 C80,100 160,180 200,210 C240,240 320,260 400,280 L400,300 Z" fill="url(#flowGrad)"/>
+
+        <!-- Dots -->
+        <circle id="dot1" cx="0" cy="60" r="6" fill="#ef4444"/>
+        <circle id="dot2" cx="100" cy="115" r="6" fill="#f97316"/>
+        <circle id="dot3" cx="240" cy="230" r="6" fill="#facc15"/>
+        <circle id="dot4" cx="400" cy="280" r="6" fill="#10b981"/>
+      </svg>
+
+      <!-- Labels -->
+      <div class="absolute top-2 left-2 bg-red-100 text-red-800 text-xs font-semibold rounded-full px-2 py-1 shadow">Now – 46.71</div>
+      <div class="absolute top-[240px] right-2 bg-gray-200 text-gray-800 text-xs font-semibold rounded-full px-2 py-1 shadow">Goal – 13.25</div>
+      <div class="absolute bottom-1 w-full flex justify-between px-2 text-xs text-gray-600">
+        <span>MAY</span><span>JUN</span><span>JUL</span><span>AUG</span>
       </div>
     </div>
 
-    <script>
-      // GSAP Animation
-      const futureDate = new Date();
-      futureDate.setDate(futureDate.getDate() + 30);
-      const options = { year: 'numeric', month: 'short', day: 'numeric' };
-      document.getElementById("dynamic-date").textContent = futureDate.toLocaleDateString('en-US', options);
+    <!-- Strategy Text -->
+    <div class="mt-6 text-left text-sm text-gray-800 max-w-md mx-auto space-y-3 leading-relaxed">
+      <p class="font-semibold">Our goal is to get you feeling major relief in the next 14 days, here’s how:</p>
+      <ol class="list-decimal list-inside space-y-2">
+        <li><strong>R-ALA</strong> works like a fire extinguisher for your nerves — calming the burning, tingling, and zapping pain within days.</li>
+        <li><strong>Benfotiamine</strong> shields your nerves from damage and starts rebuilding from the inside out.</li>
+        <li class="opacity-5 select-none"><strong>B12</strong> rewires your system by restoring the protective coating around your nerves.</li>
+      </ol>
+    <div class="mt-6 text-center p-5 rounded-xl bg-white shadow-xl border border-gray-200">
+  <p class="text-lg font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#3b82f6] to-[#14b8a6] animate-glowCustom">
+    For dosages & when to take them, click the button below to access your full plan
+  </p>
+</div>
 
 
-      gsap.from("#graph-line", {
-        duration: 2,
-        drawSVG: "0% 0%",
-        ease: "power1.inOut",
-      });
+    </div>
+  </div>
+</div>
 
-      gsap.from("#dot1", {
-        duration: 1.5,
-        opacity: 0,
-        x: -10,
-        y: 10,
-        ease: "bounce.out",
-        delay: 0.5,
-      });
+<script>
+  const futureDate = new Date();
+  futureDate.setDate(futureDate.getDate() + 30);
+  document.getElementById("dynamic-date").textContent = futureDate.toLocaleDateString('en-US', {
+    year: 'numeric', month: 'short', day: 'numeric'
+  });
 
-      gsap.from("#dot2", {
-        duration: 1.5,
-        opacity: 0,
-        x: -10,
-        y: 10,
-        ease: "bounce.out",
-        delay: 1,
-      });
+  const path = document.getElementById("graph-line");
+  const dash = path.getTotalLength();
+  path.style.strokeDasharray = dash;
+  path.style.strokeDashoffset = dash;
+  gsap.to(path, { strokeDashoffset: 0, duration: 2, ease: "power1.inOut" });
 
-      gsap.from("#dot3", {
-        duration: 1.5,
-        opacity: 0,
-        x: -10,
-        y: 10,
-        ease: "bounce.out",
-        delay: 1.5,
-      });
-
-      gsap.from("#dot4", {
-        duration: 1.5,
-        opacity: 0,
-        x: -10,
-        y: 10,
-        ease: "bounce.out",
-        delay: 2,
-      });
-
-      gsap.from("#dot5", {
-        duration: 1.5,
-        opacity: 0,
-        x: -10,
-        y: 10,
-        ease: "bounce.out",
-        delay: 2.5,
-      })
-
-    </script>
-  </body>
-</html>
+  ["dot1","dot2","dot3","dot4"].forEach((id, i) => {
+    gsap.from(`#${id}`, {
+      duration: 1.2,
+      opacity: 0,
+      y: 20,
+      ease: "bounce.out",
+      delay: 0.8 + i * 0.4
+    });
+  });
+</script>
