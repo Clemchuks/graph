@@ -24,7 +24,8 @@
      Based on your answers, we expect you to  
  <span class="font-semibold text-[#3b82f6]">start feeling real relief by: </span>
     </p>
-    <p class="text-xl text-green-800 font-bold mb-6">14 days</p>
+    <p id="plus14" class="text-xl text-green-800 font-bold mb-6"></p>
+
     
      <h1 class="font-bold text-2xl mb-2 text-[#3b82f6]">Recovery Timeline (90 Days)</h1>
 
@@ -129,23 +130,23 @@
       .callTxt{font-size:12px;fill:#334155;font-weight:600;}
     </style>
 
-    <g transform="translate(30,80)">
-      <rect width="125" height="22" class="callBox"/>
+    <g transform="translate(75,85)">
+      <rect width="140" height="22" class="callBox"/>
       <text x="6" y="15" class="callTxt">➡️ Early relief begins</text>
     </g>
 
-    <g transform="translate(80,125)">
-      <rect width="155" height="22" class="callBox"/>
+    <g transform="translate(152,130)">
+      <rect width="165" height="22" class="callBox"/>
       <text x="6" y="15" class="callTxt">🔄 Nerves start stabilizing</text>
     </g>
 
-    <g transform="translate(190,190)">
-      <rect width="180" height="22" class="callBox"/>
+    <g transform="translate(200,182)">
+      <rect width="190" height="22" class="callBox"/>
       <text x="6" y="15" class="callTxt">⬆️ Nerve Regeneration Begins</text>
     </g>
 
-    <g transform="translate(195,245)">
-      <rect width="180" height="22" class="callBox"/>
+    <g transform="translate(208,230)">
+      <rect width="190" height="22" class="callBox"/>
       <text x="6" y="15" class="callTxt">📶 Normal Function Returning
 </text>
     </g>
@@ -161,8 +162,14 @@
         <li><strong>14 Days- Early relief begins</strong> </li>
         <li><strong>30 Days - Nerves start stabilizing </strong> </li>
         <li><strong>60 Days- Nerve Regeneration Begins</strong> </li>
-        <li class="opacity-15 select-none"><strong>90 Days-  Normal Function Returning</strong> </li>
+        <li><strong>90 Days-  Normal Function Returning</strong> </li>
       </ol>
+      <hr>
+      <ul>
+        <li>✅ &nbsp; <strong>R-ALA works like a fire extinguisher for your nerves — calming the burning, tingling, and zapping pain within days.</strong> </li>
+        <li>✅&nbsp; <strong>Benfotiamine shields your nerves from damage and starts rebuilding from the inside out.</strong> </li>
+        <li class="opacity-15 select-none">✅&nbsp;<strong>B12 rewires your system by restoring the protective coating around your nerves.</strong> </li>
+      </ul>
     <div class="mt-6 text-center p-5 rounded-xl  shadow-xl border border-gray-200">
   <p class="text-lg font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#3b82f6] to-[#14b8a6] animate-glowCustom">
   For dosages & instructions,  click the button below to access your full plan.
@@ -172,7 +179,7 @@
 <div class="mt-6 text-center p-5 rounded-xl  shadow-xl border border-gray-200">
   <p class="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#3b82f6] to-[#14b8a6] animate-glowCustom">
     <strong>🔒 Our Promise to You</strong><br>
-Most protocols like this cost $199+, but for a limited time, you’ll get the full plan for just $49.97.
+Most protocols like this cost $199+, but for a limited time, you’ll get the full plan for just $49.97.<br>
 We are so confident that if you don’t feel real relief in the next 90 days, you get your money back!
 You have nothing to lose, and life without neuropathy to gain!
 
@@ -187,11 +194,20 @@ You have nothing to lose, and life without neuropathy to gain!
 </div>
 </div>
 <script>
-  const futureDate = new Date();
-  futureDate.setDate(futureDate.getDate() + 30);
-  document.getElementById("dynamic-date").textContent = futureDate.toLocaleDateString('en-US', {
-    year: 'numeric', month: 'short', day: 'numeric'
-  });
+  (() => {
+  /* 14-days-ahead stamp */
+  const el = document.getElementById('plus14');
+  if (el) {
+    const date = new Date();
+    date.setDate(date.getDate() + 14);  // jump forward two weeks
+
+    el.textContent = date.toLocaleDateString('en-US', {
+      month: 'long',   // ➜ “July”
+      day:   'numeric',// ➜ “30”
+      year:  'numeric' // ➜ “2025”  (auto-updates each year)
+    });
+  }
+})();
 
   const path = document.getElementById("graph-line");
   const dash = path.getTotalLength();
